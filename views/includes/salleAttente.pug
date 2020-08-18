@@ -1,0 +1,38 @@
+div.salleAttente
+  h1.title#nomDuSalon(style="text-align:center")
+  .columns.is-narrow.is-centered
+
+    .column.is-5
+      div#cardDessin
+        .card
+          .card-content(style="height:400px;")
+            p#nbParticipant
+            br
+            div#ParticipantsSalleAttente
+
+    .column.is-3
+      .card.is-primary(style="height:400px")
+        header.card-header
+        .card-content
+          form.form#reglages
+            .field
+              .label Nombres de tours
+              .select.is-rounded
+                select#selectTour(required  style="width:100px")
+                  option( value="2") 2
+                  option( value="3") 3
+                  option(value="4") 4
+                  option(value="5") 5
+                  option(value="6") 6
+
+            .field
+              .label Temps de dessin en secondes
+              .select.is-rounded
+                select#selectTemps(required style="width:100px")
+                  option(value="45") 45
+                  option(value="60") 60
+                  option(value="75") 75
+                  option(value="90") 90
+                  option(value="105") 105
+            .field
+              button#jouer.button.is-info Jouer

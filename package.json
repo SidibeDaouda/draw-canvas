@@ -1,0 +1,32 @@
+{
+  "name": "multijoueurgame",
+  "version": "1.0.0",
+  "description": "un jeu multi joueur ...",
+  "main": "app.js",
+  "author": "Daouda Sidibe",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "bulma": "^0.9.0",
+    "connect-flash": "^0.1.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.18",
+    "morgan": "^1.10.0",
+    "node-sass": "^4.14.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pug": "^3.0.0",
+    "socket-io": "^1.0.0",
+    "socket.io": "^2.3.0",
+    "socket.io-redis": "^5.3.0",
+    "uuid": "^8.1.0"
+  },
+  "scripts": {
+    "css-build": "node-sass --omit-source-map-url src/vendor/bulma.scss src/styles/bulma.css",
+    "css-watch": "npm run css-build -- --watch",
+    "start": "npm run css-watch"
+  }
+}

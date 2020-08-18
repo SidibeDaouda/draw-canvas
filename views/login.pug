@@ -1,0 +1,36 @@
+include includes/head.pug
+
+body
+  include ./includes/header.pug
+  section.hero.is-primary
+    .hero-body.formulaire
+      .title.has-text-white Connexion
+      .card
+        .card-content
+          .content
+            include ./includes/messages.pug
+            form(action='/utilisateurs/login', method='POST')
+
+              .field
+                p.control.has-icons-left.has-icons-right
+                  input.input(type='email', name='email', id='email', placeholder="Entrer votre email", value= typeof email != 'undefined' ? email : '')
+                  span.icon.is-small.is-left
+                    i.fas.fa-envelope
+              .field
+                p.control.has-icons-left
+                  input.input(type='password', name='mdp', id='mdp', placeholder='Entrer votre mot de passe', value= typeof mdp != 'undefined' ? mdp : '')
+                  span.icon.is-small.is-left
+                    i.fas.fa-lock
+                .control
+                  button.button.is-primary Se connecter
+                br
+                p Pas de compte ? 
+                  a(href="/utilisateurs/inscription") Inscrivez-vous maintenant !
+
+  include includes/footer.pug
+
+
+
+
+
+

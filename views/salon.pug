@@ -1,0 +1,33 @@
+include includes/head.pug
+
+body
+
+  include includes/header.pug
+
+  section.hero.is-primary
+    .hero-body.formulaire
+      .title.has-text-white Bonjour #{utilisateur.nom}
+        .column
+          .card.is-primary
+            header.card-header
+              p.card-header-title Accès aux salons 
+            .card-content
+              .content
+                div.partieInfooooo
+                form(action="/salon/partie-de-dessin")
+
+                  input(type="hidden" id="idUtilisateurSession" name="idUtilisateurSession" value=utilisateur.id)
+
+                  .field
+                    label.label Pseudo utilisé dans le salon
+                    p.control
+                      input.input(type='text', name="nomUtilisateur" onKeyDown="return supprimerToucheEspace()" minlength="3"  placeholder="Pseudo..." maxlength="14" required)
+                  .field
+                    label.label Nom du salon 
+                    p.control
+                      input.input(type='text' placeholder="Nom du salon..." name="room" required minlength="3" maxlength="20")
+                  .field
+                    .buttons.is-centered
+                      button.button.is-primary Rejoindre la partie
+
+  include includes/footer.pug

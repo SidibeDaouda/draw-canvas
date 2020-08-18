@@ -1,0 +1,16 @@
+include includes/head.pug
+
+body
+
+  include includes/header.pug
+
+  section.hero.is-primary
+    .hero-body
+      div
+        h1.title Profil
+        h2.subtitle Modifier votre profil
+        if(utilisateur.nom)
+          p Bonjour #{utilisateur.nom}
+
+
+  include includes/footer.pug

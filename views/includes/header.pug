@@ -1,0 +1,40 @@
+nav.navbar
+  .navbar-brand
+    a(href='/')
+      img(src='/images/logo2.png')
+    .navbar-burger.burger(data-target='navMenubd')
+      span
+      span
+      span
+  #navMenubd.navbar-menu
+    .navbar-start
+      .navbar-item
+        a.navbar-item.is-acive(href='/accueil') Accueil
+      if utilisateur
+        .navbar-item
+          a.navbar-item(href='/salon') Salon
+    .navbar-end
+      .navbar-item
+        .field.is-grouped
+          if !utilisateur 
+            p.control
+              a.button.is-info(href="/utilisateurs/login")
+                span.icon
+                  i.fas.fa-sign-in-alt
+                span Connexion
+            p.control
+              a.button.is-primary(href='/utilisateurs/inscription')
+                span.icon
+                  i.fas.fa-user-plus
+                span Inscription
+          else
+            p.control
+              a.button(href="/profil")
+                span.icon
+                  i.fas.fa-user-circle
+                span Profil
+            p.control
+              a.button.is-primary(href='/utilisateurs/deconnexion')
+                span.icon
+                  i.fas.fa-sign-out-alt
+                span Déconnexion

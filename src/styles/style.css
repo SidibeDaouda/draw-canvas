@@ -1,0 +1,170 @@
+* {
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: hsl(171, 100%, 41%);
+  position: relative;
+}
+
+.navbar-brand a {
+  background-size: 90%;
+  width: 152px;
+}
+
+.navbar-item {
+  margin-top: 5px;
+}
+
+.hero-body.accueil {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hero-body.formulaire {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: auto;
+}
+
+.accueilImage {
+  min-width: 550px;
+  min-height: 350px;
+  max-width: 550px;
+  max-height: 350px;
+}
+
+.footer {
+  background-color: #fff;
+  padding: 0px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+}
+
+.footer .container .content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 15px;
+}
+
+#messages {
+  height: 400px;
+  overflow-wrap: break-word;
+  overflow-y: scroll;
+}
+
+.infosMessages {
+  font-weight: bold;
+}
+
+#listeParticipants,
+#ParticipantsSalleAttente {
+  background-color: #fff;
+  color: hsl(171, 100%, 41%);
+  -webkit-box-shadow: 4px 10px 5px -1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 4px 10px 5px -1px rgba(0, 0, 0, 0.05);
+  box-shadow: 4px 10px 5px -1px rgba(0, 0, 0, 0.05);
+}
+
+#ParticipantsSalleAttente p:hover,
+#listeParticipants p:hover {
+  background-color: hsl(171, 100%, 41%);
+  color: #fff;
+}
+
+#listeParticipants p::selection,
+#ParticipantsSalleAttente p::selection {
+  color: hsl(348, 100%, 61%);
+}
+
+.card#card-infoGame #reglages {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 15px;
+}
+
+form.form#reglages .field {
+  text-align: center;
+  padding: 15px;
+}
+
+.cacher {
+  display: none;
+}
+
+.whiteboard {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.colors {
+  width: 100%;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.color {
+  display: inline-block;
+  height: 35px;
+  width: 35px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.color.black {
+  background-color: black;
+}
+
+.color.red {
+  background-color: red;
+}
+
+.color.green {
+  background-color: green;
+}
+
+.color.blue {
+  background-color: blue;
+}
+
+.color.yellow {
+  background-color: yellow;
+}
+
+#modalOpen:target {
+  display: flex;
+}
+
+.modal-card-body {
+  display: flex;
+  justify-content: space-around;
+  color: black;
+}
+
+.modal-card-body a {
+  cursor: pointer;
+}

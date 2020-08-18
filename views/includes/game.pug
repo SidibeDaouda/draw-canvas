@@ -1,0 +1,63 @@
+div.partie.cacher
+  .columns
+    .column.is-2
+      .card.is-primary(style="height:550px")
+        header.card-header
+        .card-content
+          div#listeParticipants
+
+    //- column des reglages et du canvas  
+    .column.is-7
+      .card#card-infoGame(style="margin-bottom:10px;")
+        #reglages
+          .field
+            .control
+              p#tour
+          .field
+            .control
+              p#temps
+          .field
+            .control
+              p#score Score : 0 point(s)
+
+      div#cardCanvas
+        .card(style="height:470px;")
+          canvas(class="whiteboard")
+
+        div(class="colors")
+          div(class="color black")
+          div(class="color red")
+          div(class="color green")
+          div(class="color blue")
+          div(class="color yellow")
+        //- Bouton d'ouverture
+        a#modalContentin.button.is-primary.cacher(href='#modalOpen') Ouvrir
+        //- Conteneur modal
+        #modalOpen.modal
+          .modal-background
+          .modal-card
+            header.modal-card-head
+              p.modal-card-title Choisissez un mot a dessiner
+            section.modal-card-body
+              a#mot1(href='#')
+              a#mot2(href='#')
+              a#mot3(href='#')
+
+
+    //- column de message 
+    .column.is-3
+      .card(style="height:550px")
+        header.card-header
+          p.card-header-title Messages
+        .card-content
+          .content
+            div#messages
+
+            form.form(id="messagesForm" style="padding:20px;")
+              .level-item
+                .field.has-addons
+                  p.control
+                    input.input.is-primary(type='text', placeholder='Saisissez du texte' required)
+                  p.control
+                    button.button.is-primary
+                      | Envoyer

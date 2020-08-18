@@ -1,0 +1,23 @@
+if typeof erreurs != 'undefined'
+  div(class="notification is-warning")
+    button(class="delete is-small")
+    each error in erreurs
+      p #{error.msg}
+
+if msg_succes != ''
+  div(class="notification is-primary")
+    button(class="delete")
+    p #{msg_succes}
+
+
+if msg_erreur != ''
+  div(class="notification is-danger is-small")
+    button(class="delete")
+    p #{msg_erreur}
+
+
+if error != ''
+  div(class="notification is-danger is-small")
+    button(class="delete")
+    p #{error}
+

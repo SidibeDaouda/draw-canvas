@@ -1,6 +1,9 @@
 "use strict";
-
-const socket = io();
+// const socket = io();
+const socket = io({
+  transports: ['websocket'],
+  upgrade: false
+});
 // Options récupère les données présents dansl'url
 const {
   idUtilisateurSession,
@@ -60,9 +63,7 @@ socket.on("donneesDuSalon", ({
   }
 
   let ParticipantsSalleAttente = document.querySelector("#ParticipantsSalleAttente");
-  let listeParticipants = document.querySelector("#listeParticipants");
   ParticipantsSalleAttente.innerHTML = "";
-  listeParticipants.innerHTML = "";
 
   // parcourir les uilisateurs pour les affichers dans la liste
   for (let i = 0; i < utilisateurs.length; i++) {
@@ -70,7 +71,6 @@ socket.on("donneesDuSalon", ({
     const utilisateur = utilisateurs[i].nomUtilisateur;
     p.innerText = utilisateur;
     ParticipantsSalleAttente.appendChild(p);
-    listeParticipants.innerHTML = ParticipantsSalleAttente.innerHTML;
   }
 
   // socket.emit("listeDeJoueurPartie", utilisateurs);
@@ -84,8 +84,10 @@ socket.on("donneesDuSalon", ({
     const gameParam = {
       cacher: "cacher",
       selectTour,
-      tempsDeJeuAChaqueTour
+      tempsDeJeuAChaqueTour,
+      utilisateurs
     }
+
     if (nbDeParticipant < 2) {
       alert("2 joueurs minimun requis pour joueur.")
     } else {
@@ -96,12 +98,36 @@ socket.on("donneesDuSalon", ({
   //Apres avoir cliqué sur le bouton jouer, la salle d'attente sera cacher et la partie sera lancé  
   socket.on("startGame", (gameParam) => {
 
-    console.log(utilisateurs)
+    let listeParticipants = document.querySelector("#listeParticipants");
+    listeParticipants.innerHTML = "";
 
+    // parcourir les uilisateurs pour les affichers dans la liste des utilisateur present dans le jeu
     const partie = document.querySelector("div.partie");
     partie.classList.remove(gameParam.cacher);
+
     const salleAttente = document.querySelector(".salleAttente");
     salleAttente.classList.add(gameParam.cacher);
+
+    let retourSalleAttente = document.querySelector("#retourSalleAttente");
+
+    if (joueur.room.idCreateur === joueur.idUtilisateurSession) {
+      retourSalleAttente.innerText = "Retour en salle d'attente";
+    }
+
+    const donnees = {
+      cacher: "cacher"
+    };
+
+    retourSalleAttente.addEventListener("click", () => {
+      socket.emit("retourSalleAttente", donnees);
+    });
+
+    socket.on("retourSalleAttente", (donnees) => {
+      // donnees = cacher 
+      partie.classList.add(donnees.cacher);
+      salleAttente.classList.remove(donnees.cacher);
+    });
+
 
     let selectTour = gameParam.selectTour;
     let tempsDeJeuAChaqueTour = gameParam.tempsDeJeuAChaqueTour;
@@ -112,6 +138,17 @@ socket.on("donneesDuSalon", ({
 
     let nombreDeTour = document.querySelector("#tour");
     nombreDeTour.innerText = "Tour restant(s) : " + selectTour;
+
+    let utilisateursDansLaPartie = gameParam.utilisateurs;
+
+    for (let i = 0; i < utilisateursDansLaPartie.length; i++) {
+      let p = document.createElement("p");
+      const utilisateur = utilisateursDansLaPartie[i];
+      p.innerText = utilisateur.nomUtilisateur;
+      listeParticipants.appendChild(p);
+
+    }
+
 
     /**  
     - une boîtes de dialogue s'ouvre au lancement de la partie, 
@@ -156,10 +193,9 @@ socket.on("donneesDuSalon", ({
       })
     }
 
-    setTimeout("CallButton()", 10);
+    // setTimeout("CallButton()", 10);
   });
 });
-
 
 // ouvrir la modal
 function CallButton() {

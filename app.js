@@ -139,9 +139,11 @@ io.on("connection", (socket) => {
     callback();
   });
 
+
   //Apres avoir cliqué sur le bouton jouer, la salle d'attente sera cacher et la partie sera lancé
   socket.on("startGame", (gameParam) => {
     const utilisateur = getUtilisateur(socket.id);
+    // console.log(gameParam.utilisateurs)
     io.to(utilisateur.room).emit("startGame", gameParam);
 
     // canvas dessin
@@ -149,18 +151,20 @@ io.on("connection", (socket) => {
 
   });
 
+  socket.on("retourSalleAttente", (donnees) => {
+    console.log(donnees);
+    const utilisateur = getUtilisateur(socket.id);
+    io.in(utilisateur.room).emit("retourSalleAttente", donnees)
+  });
+
+
   //Quand un utilisateur quitte la partie
   socket.on("disconnect", () => {
     console.log("deconnexion socket.io");
     const utilisateur = supprimerUtilisateur(socket.id);
     if (utilisateur) {
-      io.to(utilisateur.room).emit(
-        "message",
-        generateMessage(
-          "Admin",
-          `${utilisateur.nomUtilisateur} a quitté la partie !`
-        )
-      );
+      socket.to(utilisateur.room).emit("message", generateMessage("Admin", `${utilisateur.nomUtilisateur} a quitté la partie !`));
+
       if (utilisateur.room.idCreateur === utilisateur.idUtilisateurSession) {
         // console.log("createur")
         const chemin = "/salon";
@@ -170,7 +174,7 @@ io.on("connection", (socket) => {
         }
         socket.broadcast.to(utilisateur.room).emit("redirection", donnees)
       } else {
-        io.to(utilisateur.room).emit("donneesDuSalon", {
+        socket.to(utilisateur.room).emit("donneesDuSalon", {
           room: utilisateur.room,
           utilisateurs: getUtilisateurDansLeSalon(utilisateur.room),
         });
